@@ -54,11 +54,3 @@ class Vignere:
 			plaintext += chr((ord(ciphertext[i])-ord(key[i%m])+26)%26+97)
 
 		return plaintext
-
-if __name__ == '__main__':
-	p = raw_input()
-	k = raw_input()
-
-	c = Vignere.encrypt(p, k, len(k))
-	print c
-	print Vignere.decrypt(c, k, len(k))

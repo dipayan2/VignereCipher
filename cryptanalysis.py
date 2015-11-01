@@ -148,7 +148,7 @@ def cryptanalysis(inp):
   return get_key(yi_list)
 
 def main():
-  inp = str(raw_input())
+  inp = raw_input()
   print cryptanalysis(inp)
 
 if __name__ == '__main__':
