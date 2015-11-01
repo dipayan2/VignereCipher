@@ -1,6 +1,5 @@
 #!/usr/bin/python
 
-import gflags
 import re
 import os
 
@@ -51,7 +50,6 @@ def key_len(inp, mf_trigram):
     dist_list[i] = dist_list[i] - dist_list[0]
 
   gcd = reduce(lambda x,y:GCD(x,y),dist_list[1:])
-
   return gcd
 
 def Ic(inp):
@@ -87,23 +85,28 @@ def yi_strings(inp, m):
 
   return yi_list
 
-def check_validity(ic_vals):
+def validity(ic_vals):
   length = len(ic_vals)
   count = 0
   for ic_val in ic_vals:
     if(abs(ic_val - 0.065) < 0.01):
       count = count +1
   
-  if(float(count) > 0.5 * float(length)):
-    return True
-  return False
+  return float(count)/float(length)
 
 def verify_m(inp, m):
+  maxc = -1.0
+  max_list = []
+
   for l in xrange(m, 0, -1):
     yi_list = yi_strings(inp, l)
     ic_vals = ic_list(yi_list)
-    if(check_validity(ic_vals)):
-      return yi_list
+    v = validity(ic_vals)
+    if(v > maxc):
+      maxc = v
+      max_list = yi_list
+
+  return max_list
 
 def iThKeyChar(yi):
   char_freq = {}
